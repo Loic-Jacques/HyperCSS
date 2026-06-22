@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperCSS : Exploring the limits of HTML & CSS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a class="logo" href="/index.html">🚀 HyperCSS</a>
+
+        <details class="mobile">
+            <summary>Menu</summary>
+            <ul>
+                <li><a href="/page2.html">Le Projet</a></li>
+                <li><a href="/page3.html">Galerie</a></li>
+                <li><a href="/page4.html">Jouer</a></li>
+                <li><a href="/page5.html">Contact</a></li>
+            </ul>
+        </details>
+        <nav class="desktop">
+            <ul>
+                <li><a href="/page2.html">Le Projet</a></li>
+                <li><a href="/page3.html">Galerie</a></li>
+                <li><a href="/page4.html">Jouer</a></li>
+                <li><a href="/page5.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <h1 class="game-title">HyperCSS : Unsecure Protocol</h1>
+
+        <input type="radio" name="lane" id="lane1" checked>
+        <input type="radio" name="lane" id="lane2">
+        <input type="radio" name="lane" id="lane3">
+
+        <div class="hud">
+            Score : 
+            <div class="score-window">
+                <div class="score-track1">
+                    <div>0</div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                    <div>8</div>
+                    <div>9</div>
+                </div>
+            </div>
+
+            <div class="score-window">
+                <div class="score-track2">
+                    <div>0</div>
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                    <div>8</div>
+                    <div>9</div>
+                </div>
+            </div>
+        </div>
+
+        <section id="game">
+            <div class="background background1">
+                <img src="./images/Background-01.svg" alt="🌌">
+            </div>
+            <div class="background background2">
+                <img src="./images/Background-02.svg" alt="🌌">
+            </div>
+
+            <div class="lane lane-left"></div>
+            <div class="lane lane-center"></div>
+            <div class="lane lane-right"></div>
+
+            <div class="player">
+                <img src="./images/PlayerShip.svg" alt="🚀">
+            </div>
+
+            <div class="enemy enemy1">
+                <img src="./images/Meteor.svg" alt="☄️">
+            </div>
+            <div class="enemy enemy2">
+                <img src="./images/Meteor.svg" alt="☄️">
+            </div>
+            <div class="enemy enemy3">
+                <img src="./images/Meteor.svg" alt="☄️">
+            </div>
+
+            <div class="win-screen">
+                <h2>Transmission Stabilisée</h2>
+                <p>Le protocole HyperCSS a pu stabiliser la transmission du jeu. Bienvenue dans le monde de HyperCSS.</p>
+                <a href="./page4.html">Rejouer</a>
+            </div>
+        </section>
+
+        <section id="controls">
+            <label for="lane1">◄</label>
+            <label for="lane2">•</label>
+            <label for="lane3">►</label>
+        </section>
+    </main>
+
+    <!-- Footer -->
+</body>
+</html>

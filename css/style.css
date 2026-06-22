@@ -1,0 +1,439 @@
+/* HyperCSS - Stylesheet */
+/* Pas de Nested CSS, il ne passe pas le validateur W3C. Ils devraient mettre leur validateur à jour... */
+
+/* IMPORT NORMALIZE - RESET CSS */
+/* Sert à normaliser le CSS des navigateurs pour que tous les navigateurs affichent le même style */
+@import url('https://unpkg.com/normalize.css@8.0.1/normalize.css');
+
+/* IMPORT FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Roboto:wght@100..900&display=swap');
+
+/* VARIABLES */
+:root {
+    --background: #0F172A;
+    --card: #111C33;
+    --text-primary: #E5E7EB;
+    --text-secondary: #94A3B8;
+    --accent-primary: #38BDF8;
+    --accent-secondary: #A78BFA;
+    --danger: #FF3B3B;
+    --success: #22C55E;
+    --warning: #F59E0B;
+
+    --font-primary: 'Roboto', sans-serif;
+    --font-secondary: 'Orbitron', sans-serif;
+}
+
+/* GLOBAL STYLES */
+body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+
+    background: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    overflow-x: hidden;
+}
+
+/* On utilise la police Orbitron pour les titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    
+    font-family: var(--font-secondary);
+    line-height: 1.5;
+    
+    border-bottom: 1px solid var(--text-secondary);
+    background: var(--background);
+    z-index: 500;
+}
+    
+header a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+header a.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+    
+header nav {
+    padding: 1rem 2rem;
+}
+
+header a:hover {
+    color: var(--accent-primary);
+}
+    
+header ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap:2rem;
+}
+    
+header ul li {
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+    
+header details {
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 700;
+    position: static;
+}
+    
+header details summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+summary::marker, summary::-webkit-details-marker {
+    display: none;
+}
+
+header details ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap:1rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: var(--background);
+    border-bottom: 1px solid var(--text-secondary);
+}
+    
+header details ul li {
+    text-align: end;
+}
+
+/* MAIN */
+main {
+    flex-grow: 1;
+    padding: 1rem 2rem;
+}
+
+/* GAME */
+h1.game-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* On masque les boutons servant aux déplacements de façon à ne pas impacter le `:checked` qui peut devenir instable avec `display: none` */
+#lane1, #lane2, #lane3 {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* On positionne le joueur en fonction de la voie, le ~ permet de combiner un élement suivant le premier ciblé */
+#lane1:checked ~ #game .player {
+    left: 16.66%;
+}
+
+#lane2:checked ~ #game .player {
+    left: 50%;
+}
+
+#lane3:checked ~ #game .player {
+    left: 83.33%;
+}
+
+/* On ajoute des controleurs */
+#controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#controls label {
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--text-primary);
+    transition: 0.2s;
+}
+
+#controls label:hover {
+    color: var(--accent-primary);
+}
+
+#game {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 70dvh;
+
+    margin: 0.5rem auto;
+    border: 2px solid var(--accent-primary);
+    overflow: hidden;
+}
+
+#game .lane {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--text-secondary);
+} 
+
+/* On positionne les lanes, un à gauche, un au milieu et un à droite */
+/* La voie de droite est déduite automatiquement */
+#game .lane-left {
+    left: 33.33%;
+}
+
+#game .lane-center {
+    left: 66.66%;
+}
+
+#game .player {
+    /* On positionne le joueur en bas */
+    position: absolute;
+    bottom: 2rem; 
+    left: 16.66%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+}
+
+#game .player img, #game .enemy img {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: block;
+}
+
+#game .enemy {
+    /* On positionne les adversaires sur base commune */
+    position: absolute;
+    top: -5rem;
+    
+    transform: translateX(-50%);
+    
+    font-size: 2rem;
+
+    z-index: 200;
+}
+
+#game .enemy1 {
+    /* On positionne le premuer adversaire */
+    left: 16.66%;
+    /* On ajoute l'animation */
+    animation: fall 5s linear infinite;
+}
+
+#game .enemy2 {
+    /* On positionne le deuxieme adversaire */
+    left: 50%;
+    animation: fall 6s linear infinite 2s;
+}
+
+#game .enemy3 {
+    /* On positionne le troisieme adversaire */
+    left: 83.33%;
+    animation: fall 4s linear infinite 4s;
+}
+
+/* Animations et effets jeu */
+@keyframes fall {
+    0% {
+        top: -2rem;
+    }
+    70%, 100% {
+        top: calc(100% + 4rem);
+    }
+}
+
+/* Background défilant */
+.background {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: backgroundScroll 10s linear infinite;
+
+    z-index: 50;
+}
+
+.background1 {
+    top: 0;
+}
+
+.background2 {
+    top: -100%;
+}
+
+@keyframes backgroundScroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+/* Simulation de collision */
+
+
+/* Simulation de victoire */
+.win-screen {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    background: var(--card);
+    font-family: var(--font-secondary);
+    color: var(--success);
+    font-size: 2rem;
+
+    opacity: 0;
+    
+    z-index: 1000;
+
+    animation: gameWin 201s linear forwards;
+}
+
+@keyframes gameWin {
+    0%, 99% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Simulation du Score */
+.hud {
+    position: relative;
+    /* top: 1rem; */
+    /* left: 1rem; */
+    font-family: var(--font-secondary);
+    font-weight: 600;
+
+    z-index: 100;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+}
+
+.hud .score-window {
+    height: 1.2rem;
+    overflow: hidden;
+    gap: 0.1rem;
+}
+
+.hud .score-track1,
+.hud .score-track2 {
+    text-align: center;
+}
+
+.hud .score-track1 {
+    animation: scoreUp 200s linear infinite;
+}
+
+.hud .score-track2 {
+    animation: scoreUp 20s linear infinite;
+}
+
+@keyframes scoreUp {
+    0%, 9.9% {
+        transform: translateY(0);
+    }
+    10%, 19.9% {
+        transform: translateY(-10%);
+    }
+    20%, 29.9% {
+        transform: translateY(-20%);
+    }
+    30%, 39.9% {
+        transform: translateY(-30%);
+    }
+    40%, 49.9% {
+        transform: translateY(-40%);
+    }
+    50%, 59.9% {
+        transform: translateY(-50%);
+    }
+    60%, 69.9% {
+        transform: translateY(-60%);
+    }
+    70%, 79.9% {
+        transform: translateY(-70%);
+    }
+    80%, 89.9% {
+        transform: translateY(-80%);
+    }
+    90%, 99.9% {
+        transform: translateY(-90%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+/* FOOTER */
+
+
+/* RESPONSIVE */
+.mobile {
+    display: block;
+}
+
+.desktop {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .mobile {
+        display: none;
+    }
+    
+    .desktop {
+        display: block;
+    }
+    
+    header {
+        padding: 0 2rem;
+        line-height: 2;
+    }
+        
+    header a.logo {
+        font-size: 2rem;
+    }
+
+    h1.game-title {
+        font-size: 1.5rem;
+    }
+
+    .hud {
+        left: 33.33%; 
+        font-size: 1.2rem;
+    }
+}
