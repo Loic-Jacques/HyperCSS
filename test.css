@@ -1,0 +1,12 @@
+.hidden {
+    
+    visibility: hidden;
+    pointer-events: none;
+}
+    
+.visible {
+    
+    visibility: visible;
+    pointer-events: auto;
+}
+

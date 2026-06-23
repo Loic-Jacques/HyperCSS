@@ -61,11 +61,20 @@ header {
 header a {
     color: var(--text-primary);
     text-decoration: none;
+    display: flex;
+    flex-direction: row;
 }
 
 header a.logo {
     font-size: 1.5rem;
     font-weight: 900;
+}
+
+header a.logo img {
+    height: 2.5rem;
+    width: 2.5rem;
+    align-self: center;
+    transform: rotate(45deg);
 }
     
 header nav {
@@ -98,7 +107,7 @@ header details {
     font-weight: 700;
     position: static;
 }
-    
+
 header details summary {
     list-style: none;
     display: flex;
@@ -119,13 +128,13 @@ header details ul {
     top: 100%;
     right: 0;
     width: 100%;
-    padding: 1rem 2rem;
     background: var(--background);
     border-bottom: 1px solid var(--text-secondary);
 }
     
 header details ul li {
-    text-align: end;
+    margin: 0 1rem;
+    align-self: end;
 }
 
 /* MAIN */
@@ -546,6 +555,16 @@ h1.game-title {
         
     header a.logo {
         font-size: 2rem;
+    }
+
+    header a.logo img {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    main {
+        width: 60%;
+        margin: 0 auto;
     }
 
     h1.game-title {
