@@ -187,6 +187,12 @@ h1.game-title {
     margin: 0.5rem auto;
     border: 2px solid var(--accent-primary);
     overflow: hidden;
+
+    /* On enleve les interactions de la hitbox le temps de démarrer */
+    pointer-events: none;
+
+    /* On ajoute une animation pour activer les élements après lancement sinon la hitbox s'active immédiatement */
+    animation: gameStart 0.001s linear forwards;
 }
 
 #game .lane {
@@ -210,12 +216,16 @@ h1.game-title {
 #game .player {
     /* On positionne le joueur en bas */
     position: absolute;
-    bottom: 2rem; 
+    bottom: -5rem; 
     left: 16.66%;
 
     transform: translateX(-50%);
+    
 
     z-index: 100;
+
+    /* On lance le joueur avec un décalage pour éviter un bug système */
+    animation: playerStart 2s ease forwards;
 }
 
 #game .player img, #game .enemy img {
@@ -240,26 +250,42 @@ h1.game-title {
     /* On positionne le premuer adversaire */
     left: 16.66%;
     /* On ajoute l'animation */
-    animation: fall 5s linear infinite;
+    animation: fall 5s linear;
+    animation-iteration-count: 100;
+    animation-delay: 5s;
 }
 
 #game .enemy2 {
     /* On positionne le deuxieme adversaire */
     left: 50%;
-    animation: fall 6s linear infinite 2s;
+    animation: fall 6s linear;
+    animation-iteration-count: 100;
+    animation-delay: 2s;
 }
 
 #game .enemy3 {
     /* On positionne le troisieme adversaire */
     left: 83.33%;
-    animation: fall 4s linear infinite 4s;
+    animation: fall 4s linear;
+    animation-iteration-count: 100;
+    animation-delay: 0.5s;
+}
+
+/* Animation pour l'initiation du jeu */
+@keyframes gameStart {
+    0%, 99% { pointer-events: none; opacity: 0; }
+    100% { pointer-events: auto; opacity: 1; }
+}
+
+/* Animation pour l'initiation du joueur */
+@keyframes playerStart {
+    0% { bottom: -5rem; }
+    100% { bottom: 2rem; }
 }
 
 /* Animations et effets jeu */
 @keyframes fall {
-    0% {
-        top: -2rem;
-    }
+    0% { top: -2rem; }
     70%, 100% {
         top: calc(100% + 4rem);
     }
@@ -271,7 +297,7 @@ h1.game-title {
     left: 0;
     width: 100%;
     height: 100%;
-    animation: backgroundScroll 10s linear infinite;
+    animation: backgroundScroll 3s linear infinite;
 
     z-index: 50;
 }
@@ -294,7 +320,63 @@ h1.game-title {
 }
 
 /* Simulation de collision */
+/* DESACTIVE - MICROTICK AU LANCEMENT QUI LAISSE L'ETAT AU CHARGEMENT TRUE */
+/* .hitbox {
+    position: absolute;
+    bottom: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    z-index: 300;
+    visibility: hidden;
+    pointer-events: none;
 
+    animation: none;
+} */
+
+/* .hitbox1, .hitbox2, .hitbox3 {
+    animation-fill-mode: none;
+} */
+
+/* .hitbox1 {
+    left: 16.66%;
+    animation: hitboxActive 5s linear forwards;
+    animation-delay: 5s;
+} */
+
+/* .hitbox2 {
+    left: 50%;
+    animation: hitboxActive 6s linear forwards;
+    animation-delay: 2s;
+} */
+
+/* .hitbox3 {
+    left: 83.33%;
+    animation: hitboxActive 4s linear forwards;
+    animation-delay: 0.5s;
+} */
+
+/* @keyframes hitboxActive {
+    0% {
+        visibility: hidden;
+        pointer-events: none;
+    }
+    10%, 51% {
+        visibility: hidden;
+        pointer-events: none;
+    }
+    52%, 59% {
+        visibility: visible;
+        pointer-events: auto;
+    }
+    60%, 99% {
+        visibility: hidden;
+        pointer-events: none;
+    }
+    100% {
+        visibility: hidden;
+        pointer-events: none;
+    }
+} */
 
 /* Simulation de victoire */
 .win-screen {
@@ -314,12 +396,50 @@ h1.game-title {
 
     opacity: 0;
     
-    z-index: 1000;
+    z-index: 600;
 
     animation: gameWin 201s linear forwards;
 }
 
 @keyframes gameWin {
+    0%, 99% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Simulation de perte */
+.loose-screen {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    background: var(--card);
+    font-family: var(--font-secondary);
+    color: var(--error);
+    font-size: 2rem;
+
+    opacity: 0;
+    
+    z-index: 700;
+}
+
+/* Check les collisions */
+/* DESACTIVE - MICROTICK AU LANCEMENT QUI LAISSE L'ETAT AU CHARGEMENT TRUE ET SINON ICI CONDITION TOUJOURS TRUE */
+/* #lane1:checked ~ #game:has(.hitbox1) .loose-screen,
+#lane2:checked ~ #game:has(.hitbox2) .loose-screen,
+#lane3:checked ~ #game:has(.hitbox3) .loose-screen {
+    animation: gameLoose 1s linear forwards;
+} */
+
+@keyframes gameLoose {
     0%, 99% {
         opacity: 0;
     }
