@@ -143,6 +143,29 @@ main {
     padding: 1rem 2rem;
 }
 
+/* Inex - Call to action */
+main .cto {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:1rem;
+    padding: 1rem 0;
+    background: var(--accent-primary);
+    border-radius: 1rem;
+    font-family: var(--font-secondary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+main .cto a {
+    text-decoration: none;
+    color: var(--card);
+    margin: auto;
+}
+
 /* Index - Blog */
 main section {
     display: flex;
@@ -199,6 +222,71 @@ main section article code {
 
 main section article ol, main section article ul {
     margin-left: 2rem;
+}
+
+/* Page 2 - Projet */
+#project {
+    display: grid;
+    grid-template: 
+    "title"
+    "img-repousser"
+    "repousser"
+    "img-animation"
+    "animation"
+    "img-mecanique"
+    "mecanique";
+    gap: 1rem;
+}
+
+#project section * {
+    margin: 0;
+    padding: 0;
+}
+
+#project h1 {
+    grid-area: title;
+}
+
+#project img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+
+#project #repousser {
+    grid-area: repousser;
+}
+
+#project #img-repousser {
+    grid-area: img-repousser;
+    max-height: 300px;
+}
+
+#project #animation {
+    grid-area: animation;
+}
+
+#project #img-animation {
+    grid-area: img-animation;
+    max-height: 200px;
+}
+
+#project #mecanique {
+    grid-area: mecanique;
+}
+
+#project #mecanique p:last-child {
+    font-family: var(--font-secondary);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+#project #img-mecanique {
+    grid-area: img-mecanique;
+    max-height: 250px;
 }
 
 /* GAME */
@@ -623,6 +711,14 @@ h1.game-title {
     main {
         width: 60%;
         margin: 0 auto;
+    }
+
+    #project {
+        grid-template: 
+        "title title title"
+        "repousser repousser img-repousser"
+        "img-animation animation animation"
+        "mecanique mecanique img-mecanique";
     }
 
     h1.game-title {
