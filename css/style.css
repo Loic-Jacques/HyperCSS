@@ -143,6 +143,64 @@ main {
     padding: 1rem 2rem;
 }
 
+/* Index - Blog */
+main section {
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+main section article {
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    border-bottom: 2px solid var(--text-secondary);
+    padding-bottom: 1rem;
+}
+
+main section article:last-child {
+    /* Pas de bordure pour le dernier article */
+    border-bottom: none;
+}
+
+main section article * {
+    margin: 0;
+    padding: 0;
+}
+
+main section article p.date-post {
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+main section article img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+main section article a {
+    text-decoration: none;
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+main section article a:hover {
+    color: var(--accent-secondary);
+}
+
+main section article code {
+    background: var(--card);
+    color: var(--text-secondary);
+    border-radius: 0.25rem;
+}
+
+main section article ol, main section article ul {
+    margin-left: 2rem;
+}
+
 /* GAME */
 h1.game-title {
     font-size: 1rem;
